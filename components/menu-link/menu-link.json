@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_menu_link_menu_links",
+  "info": {
+    "name": "menuLink",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "text",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "text": {
+      "type": "string",
+      "required": true,
+      "maxLength": 150,
+      "minLength": 1
+    },
+    "newTab": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}
