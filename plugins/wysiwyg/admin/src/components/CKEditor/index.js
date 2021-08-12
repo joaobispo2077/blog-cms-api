@@ -75,6 +75,16 @@ const configuration = {
 
 
 const Editor = ({ onChange, name, value }) => {
+  const [isReady, setIsReady] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsReady(true);
+  }, []);
+
+  if (!isReady) {
+    return <div>Loading editor...</div>;
+  }
+
   return (
     <Wrapper>
       <CKEditor
