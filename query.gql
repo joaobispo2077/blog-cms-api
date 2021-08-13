@@ -1,0 +1,151 @@
+# Write your query or mutation here
+fragment image on UploadFile {
+  id
+  alternativeText
+  url
+}
+
+fragment cover on Post {
+  cover {
+    ...image
+  }
+}
+
+fragment tag on Tag {
+  id
+  name
+  slug
+}
+
+fragment author on Author {
+  id
+  name
+  slug
+}
+
+fragment category on Category {
+  id
+  name
+  slug
+}
+
+fragment tags on Post {
+  tags {
+    ...tag
+  }
+}
+
+fragment authorPost on Post {
+  author {
+    ...author
+  }
+}
+
+fragment categories on Post {
+  categories {
+    ...category
+  }
+}
+
+fragment menuLink on ComponentMenuLinkMenuLink {
+  id
+  link
+  text
+  newTab
+}
+
+fragment post on Post {
+  id
+  slug
+  title
+  excerpt
+  content
+  allowedComments
+  ...cover
+  ...categories
+  ...tags
+  ...authorPost
+}
+
+fragment settings on Settings {
+  id
+  name
+  description
+  logo {
+    ...image
+  }
+  menuLink {
+    ...menuLink
+  }
+  footerText
+}
+
+query GET_POSTS {
+  setting {
+    ...settings
+  }
+
+  posts {
+    ...post
+  }
+}
+
+query GET_POST_BY_SLUG(
+  $postSlug: String!
+) {
+  setting {
+    ...settings
+  }
+
+  posts(where: { slug: $postSlug }) {
+    ...post
+  }
+}
+
+query GET_POSTS_BY_AUTHOR(
+  $authorSlug: String!
+) {
+  setting {
+    ...settings
+  }
+
+  posts(
+    where: {
+      author: { slug: $authorSlug }
+    }
+  ) {
+    ...post
+  }
+}
+
+query GET_POSTS_BY_CATEGORY(
+  $categorySlug: String!
+) {
+  setting {
+    ...settings
+  }
+
+  posts(
+    where: {
+      categories: {
+        slug: $categorySlug
+      }
+    }
+  ) {
+    ...post
+  }
+}
+
+query GET_POSTS_BY_TAGS(
+  $tagSlug: String!
+) {
+  setting {
+    ...settings
+  }
+
+  posts(
+    where: { tags: { slug: $tagSlug } }
+  ) {
+    ...post
+  }
+}
